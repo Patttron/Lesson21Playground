@@ -7,7 +7,7 @@
     tools:context=".MainFragment">
 
     <Button
-        android:id="@+id/open_url_sample"
+        android:id="@+id/openUrlSample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/open_url_sample" />

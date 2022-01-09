@@ -18,7 +18,8 @@ class CameraSampleFragment : Fragment() {
     private var binding: FragmentCameraBinding? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -27,7 +28,7 @@ class CameraSampleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentCameraBinding.bind(view).apply {
-            this.selectPhoto.setOnClickListener {
+            selectPhoto.setOnClickListener {
                 dispatchTakePictureIntent()
             }
         }
@@ -45,13 +46,14 @@ class CameraSampleFragment : Fragment() {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             // Обязательно проверяем, что есть ли Activity, которая может обработать наш вызов
         } catch (e: ActivityNotFoundException) {
+            e.toString()
             // display error state to the user
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             binding?.photo?.setImageBitmap(imageBitmap)
         }

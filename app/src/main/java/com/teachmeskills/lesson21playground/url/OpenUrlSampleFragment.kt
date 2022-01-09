@@ -1,5 +1,6 @@
 package com.teachmeskills.lesson21playground.url
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,7 +14,8 @@ import com.teachmeskills.lesson21playground.databinding.FragmentOpenUrlSampleBin
 class OpenUrlSampleFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -23,15 +25,16 @@ class OpenUrlSampleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         FragmentOpenUrlSampleBinding.bind(view).apply {
             this.openUrl.setOnClickListener {
-                                                                                                                                            }
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")))
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com")))
+                } catch (e: ActivityNotFoundException) {
+                    e.toString()
+                }
+            }
         }
-
-
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() = OpenUrlSampleFragment()
     }
